@@ -55,6 +55,13 @@ var ErrMaxDepth = fmt.Errorf("attempted to traverse hamt beyond max depth")
 //
 // (Note: the `refmt` tags are ignored by cbor-gen which will generate an
 // array type rather than map.)
+//
+// The IPLD Schema representation of this data structure is as follows:
+//
+// 		type Node struct {
+// 			bitfield Bytes
+// 			pointers [Pointer]
+// 		} representation tuple
 type Node struct {
 	Bitfield *big.Int   `refmt:"bf"`
 	Pointers []*Pointer `refmt:"p"`
@@ -82,6 +89,15 @@ type Node struct {
 //
 // (Note: the `refmt` tags are ignored by cbor-gen which will generate an
 // array type rather than map.)
+//
+// The IPLD Schema representation of this data structure is as follows:
+//
+// 		type Pointer union {
+// 			Bucket "0"
+//			&Node "1"
+// 		} representation keyed
+//
+//		type Bucket [KV]
 type Pointer struct {
 	KVs  []*KV   `refmt:"v,omitempty"`
 	Link cid.Cid `refmt:"l,omitempty"`
@@ -104,6 +120,13 @@ type Pointer struct {
 // stored by the user.
 //
 // Keys are represented as bytes
+//
+// The IPLD Schema representation of this data structure is as follows:
+//
+//		type KV struct {
+//			key Bytes
+//			value Any
+//		} representation tuple
 type KV struct {
 	Key   []byte
 	Value *cbg.Deferred
