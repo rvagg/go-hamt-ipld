@@ -273,7 +273,7 @@ func (n *Node) getValue(ctx context.Context, hv *hashBits, k string, cb func(*KV
 
 	c := n.getPointer(cindex)
 	if c.isShard() {
-	  // if isShard, we have a pointer to a child that we need to load and
+		// if isShard, we have a pointer to a child that we need to load and
 		// delegate our find operation to
 		chnd, err := c.loadChild(ctx, n.store, n.bitWidth, n.hash)
 		if err != nil {
@@ -528,7 +528,7 @@ func (n *Node) modifyValue(ctx context.Context, hv *hashBits, k []byte, v *cbg.D
 
 	child := n.getPointer(cindex)
 	if child.isShard() {
-	  // if isShard, we have a pointer to a child that we need to load and
+		// if isShard, we have a pointer to a child that we need to load and
 		// delegate our modify operation to
 		chnd, err := child.loadChild(ctx, n.store, n.bitWidth, n.hash)
 		if err != nil {
