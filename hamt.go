@@ -93,8 +93,8 @@ type Node struct {
 // The IPLD Schema representation of this data structure is as follows:
 //
 // 		type Pointer union {
-// 			Bucket "0"
-//			&Node "1"
+//			&Node "0"
+// 			Bucket "1"
 // 		} representation keyed
 //
 //		type Bucket [KV]
